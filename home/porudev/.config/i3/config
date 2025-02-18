@@ -1,0 +1,155 @@
+# i3 config file (v4)
+
+# Super key
+set $mod Mod4
+
+# Title font
+font pango:Cantarell Bold 12
+
+# Start XDG
+exec --no-startup-id dex --autostart --environment i3
+
+# Start NetworkManager applet
+# exec --no-startup-id nm-applet
+
+# Floating modifier (key + drag)
+floating_modifier $mod
+
+# Drag the title bar
+tiling_drag modifier titlebar
+
+# Start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start app launcher (please use rofi instead of dmenu)
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# Switch focus window
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focus window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal and vertical orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Toggle fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Toggle floating
+bindsym $mod+Shift+space floating toggle
+
+# Defining workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# Window resize keybind
+bindsym $mod+r mode "resize"
+
+# i3-Gaps Looks
+for_window [class="^.*"] border pixel 1
+
+# Gap size of inner and outer
+gaps inner 6
+gaps outer 4
+
+# Window color settings
+# class                 border  backgr. text    indicator
+client.focused          #434C5E #434C5E #ffffff #434C5E
+client.unfocused        #2e3440 #2E3440 #ffffff #2E3440
+client.focused_inactive #2e3440 #2E3440 #ffffff #2E3440
+client.placeholder      #2e3440 #2E3440 #ffffff #2E3440
+client.urgent           #BF616A #BF616A #ffffff #BF616A
+
+# Auto start background applications
+exec dunst
+exec flameshot
+exec_always ~/.config/polybar/launch.sh
+exec ibus-daemon -rxRd
+exec_always feh --bg-fill ~/Downloads/capitano.png
+
+# Personal Keybindings
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+bindsym $mod+Mod1+Right move workspace to output right
+bindsym $mod+Mod1+Left move workspace to output left
+
+bindsym $mod+Shift+s exec flameshot gui
+bindsym Mod1+Print exec flameshot screen -c
+bindsym Print exec flameshot full -c
+
+# I used to have a bunch of backgrounds
+#bindsym $mod+Shift+b exec feh --randomize --bg-fill ~/Images/wlop/*
