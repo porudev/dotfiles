@@ -1,0 +1,34 @@
+" Set compatible mode 
+set nocompatible
+set clipboard=unnamedplus
+
+" Encoding
+set encoding=utf-8
+
+" Show line numbers
+set number
+
+" Tab formatting
+set tabstop=4
+set softtabstop=0 noexpandtab
+set shiftwidth=4
+
+set shiftwidth=4 smarttab
+set tabstop=8 softtabstop=0
+
+" Auto Closing
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+" Hotkey
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>" 
+
+" Call plugins
+if filereadable(expand("~/.config/vim/vimrc.plug"))
+	source ~/.config/vim/vimrc.plug
+endif

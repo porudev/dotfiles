@@ -1,0 +1,10 @@
+call plug#begin('~/.config/vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+Plug 'arcticicestudio/nord-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ap/vim-css-color'
+
+call plug#end()
+
+colorscheme nord
